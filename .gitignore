@@ -27,3 +27,8 @@
 
 # Mac os
 .DS_Store
+# Depoly or Development info
+.env
+
+# run info
+Gemfile.lock
