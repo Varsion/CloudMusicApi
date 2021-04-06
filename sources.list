@@ -1,0 +1,12 @@
+# 这里只是stretch版本的，镜像如果Ruby镜像用的系统版本更改了
+# 需要手动手动
+# 这部分逻辑也可以写到Dockerfile中，这样就可以动态获取版本
+# 但这部分需要熟悉Linux,这里就简单实现了，会在Docker课程中讲解
+deb http://mirrors.163.com/debian/ stretch main non-free contrib
+deb http://mirrors.163.com/debian/ stretch-updates main non-free contrib
+deb http://mirrors.163.com/debian/ stretch-backports main non-free contrib
+deb-src http://mirrors.163.com/debian/ stretch main non-free contrib
+deb-src http://mirrors.163.com/debian/ stretch-updates main non-free contrib
+deb-src http://mirrors.163.com/debian/ stretch-backports main non-free contrib
+deb http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib
+deb-src http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib
