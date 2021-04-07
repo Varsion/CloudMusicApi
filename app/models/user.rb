@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+	# 添加密码属性 非数据库字段
+	attr_accessor :password
 	# 验证约束
 	# 昵称不能为空 长度1～15
 	validates :nickname, presence: true, length: { minimum: 1, maximum: 15 }
@@ -13,4 +15,16 @@ class User < ApplicationRecord
 	validates :email, email: true
 	# 默认排序 根据创建时间倒序
 	default_scope -> { order(created_at: :desc) }
+	# 密码验证
+	validates :password, presence: true, length: {minimum: 6,maximum: 15 }
+	# 重写密码加密逻辑
+	def password=(unencrypted_password)
+		if unencrypted_password.nil?
+			self.password_digest = nil
+		elsif !unencrypted_password.empty?
+			@password = unencrypted_password
+			
+			self.password_digest = DigestUtil.encrypt(unencrypted_password)
+		end
+	end
 end
