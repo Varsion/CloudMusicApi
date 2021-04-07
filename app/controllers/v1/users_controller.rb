@@ -1,16 +1,11 @@
 class V1::UsersController < ApplicationController
 	before_action :set_user, only: %i[ show update destroy ]
 	
-	# GET /users
-	# GET /users.json
-	def index
-		@users = User.all
-		render json: @users, status: :ok
-	end
 	
 	# GET /users/1
 	# GET /users/1.json
 	def show
+		# 会自动渲染对应的 jbuilder文件
 	end
 	
 	# POST /users
@@ -42,12 +37,6 @@ class V1::UsersController < ApplicationController
 		else
 			render json: @user.errors, status: :unprocessable_entity
 		end
-	end
-	
-	# DELETE /users/1
-	# DELETE /users/1.json
-	def destroy
-		@user.destroy
 	end
 	
 	private
