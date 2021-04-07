@@ -23,11 +23,8 @@ class User < ApplicationRecord
 			self.password_digest = nil
 		elsif !unencrypted_password.empty?
 			@password = unencrypted_password
-			# 是否是低成本，默认：生产环境为false
-			# 加密强度，开发环境可以不用这么高的强度
-			cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
 			
-			self.password_digest = BCrypt::Password.create(unencrypted_password, cost: cost)
+			self.password_digest = DigestUtil.encrypt(unencrypted_password)
 		end
 	end
 end
