@@ -1,4 +1,4 @@
-class MonitorsController < ApplicationController
+class V1::MonitorsController < ApplicationController
 	# 获取当前版本
 	def version
 		version = {

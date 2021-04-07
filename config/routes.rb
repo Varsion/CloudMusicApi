@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-	# 获取当前项目版本
-    get 'monitors/version'
-    resources :users
+	
+	namespace :v1 do
+		get 'monitors/version'
+		resources :users
+	end
+	
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     root 'homes#index'
 end
