@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+	# 添加密码属性 非数据库字段
+	attr_accessor :password
 	# 验证约束
 	# 昵称不能为空 长度1～15
 	validates :nickname, presence: true, length: { minimum: 1, maximum: 15 }
@@ -13,4 +15,19 @@ class User < ApplicationRecord
 	validates :email, email: true
 	# 默认排序 根据创建时间倒序
 	default_scope -> { order(created_at: :desc) }
+	# 密码验证
+	validates :password, presence: true, length: {minimum: 6,maximum: 15 }
+	# 重写密码加密逻辑
+	def password=(unencrypted_password)
+		if unencrypted_password.nil?
+			self.password_digest = nil
+		elsif !unencrypted_password.empty?
+			@password = unencrypted_password
+			# 是否是低成本，默认：生产环境为false
+			# 加密强度，开发环境可以不用这么高的强度
+			cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+			
+			self.password_digest = BCrypt::Password.create(unencrypted_password, cost: cost)
+		end
+	end
 end
