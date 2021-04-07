@@ -19,9 +19,9 @@ class V1::UsersController < ApplicationController
 		@user = User.new(user_params)
 		
 		if @user.save
-			render :show, status: :created, location: @user
+			render_success(@user)
 		else
-			render json: @user.errors, status: :unprocessable_entity
+			render_detail_error(20,"保存用户失败，请稍后再试！",@user.errors)
 		end
 	end
 	

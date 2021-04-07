@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::API
 	rescue_from Exception, with: :all_exception
 	def all_exception exception
+		logger.error do
+			"ApplicationController all_exception #{exception}"
+		end
 		if Rails.env.production?
 			render json: {status: 10, message: "Some Errors"}, status: :accepted
 		else
