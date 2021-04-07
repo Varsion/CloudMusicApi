@@ -26,7 +26,7 @@ class ApplicationController < ActionController::API
 	end
 	# detail errors
 	# 通过简要错误信息和详细错误信息来进行信息分割
-	def render_detail_error code,message,detail
-		render json: {status: code, message: message, detail: detail}, status: :accepted
+	def render_detail_error detail
+		render json: {status: ERROR_ARGUMENT, message: ERROR_ARGUMENT_MESSAGE, detail: detail}
 	end
 end

@@ -17,11 +17,20 @@ class V1::UsersController < ApplicationController
 	# POST /users.json
 	def create
 		@user = User.new(user_params)
+		if @user.email.blank? or @user.password.blank? or @user.phone.blank?
+			render_error(ERROR_EMPTY_EMAIL_OR_PASSWORD,ERROR_EMPTY_EMAIL_OR_PASSWORD_MESSAGE)
+			return
+		end
+		
+		if User.exists?(email: @user.email) or User.exists?(phone: @user.phone)
+			render_error(ERROR_USER_EXIST,ERROR_USER_EXIST_MESSAGE)
+			return
+		end
 		
 		if @user.save
 			render_success(@user)
 		else
-			render_detail_error(20,"保存用户失败，请稍后再试！",@user.errors)
+			render_detail_error(@user.errors)
 		end
 	end
 	
@@ -49,6 +58,6 @@ class V1::UsersController < ApplicationController
 	
 	# Only allow a list of trusted parameters through.
 	def user_params
-		params.permit(:nickname, :avatar, :description, :gender, :birthday, :email, :phone, :password_digest, :session_digest, :reset_password_digest, :reset_password_sent_at, :confirmation_digest, :confirmed_at, :confirmation_sent_at, :qq_id, :qq_id_digest, :wechat_id, :wechat_id_digest)
+		params.permit(:nickname, :avatar, :description, :password, :gender, :birthday, :email, :phone)
 	end
 end
