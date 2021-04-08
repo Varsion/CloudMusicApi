@@ -40,5 +40,9 @@ module Concerns
 		def unauthenticated!
 			render_json_and_code({status: ERROR_UNAUTHORIZED, message: ERROR_UNAUTHORIZED_MESSAGE}, :unauthorized)
 		end
+		
+		def authenticate_user!
+			unauthenticated! unless current_user
+		end
 	end
 end
