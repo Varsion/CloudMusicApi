@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::API
+	# 全局禁用 Session
+	before_action :destroy_session
+	
 	rescue_from Exception, with: :all_exception
 	def all_exception exception
 		logger.error do
@@ -10,23 +13,13 @@ class ApplicationController < ActionController::API
 			raise exception
 		end
 	end
-	# success
-	def render_success data
-		render json: data, status: :ok
-	end
+	# 引入 render_json 方法组
+	include Concerns::RenderJson
+	# 引入 current_user
+	include Concerns::CurrentUser
 	
-	# errors
-	def render_error code, message
-		render json: {status: code, message: message}
-	end
-	
-	# default errors
-	def render_default_error
-		render_error(20, "Parameter errors")
-	end
-	# detail errors
-	# 通过简要错误信息和详细错误信息来进行信息分割
-	def render_detail_error detail
-		render json: {status: ERROR_ARGUMENT, message: ERROR_ARGUMENT_MESSAGE, detail: detail}
-	end
+	private
+		def destroy_session
+			request.session_options[:skip] = true
+		end
 end
