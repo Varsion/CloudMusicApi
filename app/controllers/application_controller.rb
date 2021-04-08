@@ -12,8 +12,10 @@ class ApplicationController < ActionController::API
 			raise exception
 		end
 	end
-	# 引入 render_json 等方法
+	# 引入 render_json 方法组
 	include Concerns::RenderJson
+	# 引入 current_user
+	include Concerns::CurrentUser
 	
 	private
 		def destroy_session
