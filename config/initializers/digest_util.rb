@@ -7,4 +7,8 @@ module DigestUtil
 		# 加密
 		BCrypt::Password.create(data, cost: cost)
 	end
+	
+	def self.random_base64_32
+		return SecureRandom.urlsafe_base64(32)
+	end
 end
