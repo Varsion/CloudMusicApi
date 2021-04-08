@@ -12,33 +12,9 @@ class ApplicationController < ActionController::API
 			raise exception
 		end
 	end
-	# success
-	def render_success data
-		render json: data, status: :ok
-	end
+	# 引入 render_json 等方法
+	include Concerns::RenderJson
 	
-	# errors
-	def render_error code, message
-		render json: {status: code, message: message}
-	end
-	
-	# default errors
-	def render_default_error
-		render_error(20, "Parameter errors")
-	end
-	# detail errors
-	# 通过简要错误信息和详细错误信息来进行信息分割
-	def render_detail_error detail
-		render json: {status: ERROR_ARGUMENT, message: ERROR_ARGUMENT_MESSAGE, detail: detail}
-	end
-	
-	def render_json object
-		render_json_and_code(object, :ok)
-	end
-	
-	def render_json_and_code object, code
-		render json: {data:object}, status: code
-	end
 	private
 		def destroy_session
 			request.session_options[:skip] = true
