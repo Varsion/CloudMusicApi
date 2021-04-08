@@ -1,4 +1,5 @@
 class V1::SessionsController < ApplicationController
+	before_action :authenticate_user!, only: :destroy
   def create
 	  email = params[:email]
 	  phone = params[:phone]
@@ -36,5 +37,6 @@ class V1::SessionsController < ApplicationController
   end
   
   def destroy
+	  current_user.update_attribute(:session_digest, "")
   end
 end
