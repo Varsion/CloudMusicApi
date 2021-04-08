@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 	namespace :v1 do
 		get 'monitors/version'
 		resources :users, except:[:index,:destroy]
+		
+		# login and logout
+		resources :sessions, only: [:create,:destroy]
 	end
 	
 	namespace :v2 do

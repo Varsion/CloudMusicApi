@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+	# 全局禁用 Session
+	before_action :destroy_session
 	rescue_from Exception, with: :all_exception
 	def all_exception exception
 		logger.error do
@@ -29,4 +31,16 @@ class ApplicationController < ActionController::API
 	def render_detail_error detail
 		render json: {status: ERROR_ARGUMENT, message: ERROR_ARGUMENT_MESSAGE, detail: detail}
 	end
+	
+	def render_json object
+		render_json_and_code(object, :ok)
+	end
+	
+	def render_json_and_code object, code
+		render json: {data:object}, status: code
+	end
+	private
+		def destroy_session
+			request.session_options[:skip] = true
+		end
 end
