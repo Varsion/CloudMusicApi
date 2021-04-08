@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
 	# 全局禁用 Session
 	before_action :destroy_session
+	
 	rescue_from Exception, with: :all_exception
 	def all_exception exception
 		logger.error do

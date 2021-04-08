@@ -3,6 +3,7 @@ module Concerns
 		def self.included base
 			base.class_eval do
 				helper_method :current_user
+				helper_method :unauthenticated!
 			end
 		end
 		# 从请求头中恢复用户（检验用户是否登陆
@@ -33,6 +34,11 @@ module Concerns
 				end
 			end
 			@current_user
+		end
+		
+		# 返回 请先登陆
+		def unauthenticated!
+			render_json_and_code({status: ERROR_UNAUTHORIZED, message: ERROR_UNAUTHORIZED_MESSAGE}, :unauthorized)
 		end
 	end
 end
