@@ -22,6 +22,8 @@ class V1::UsersController < ApplicationController
 			return
 		end
 		
+		@user.encrypt_open_id
+		
 		if @user.save
 			render_success(@user)
 		else
@@ -47,6 +49,6 @@ class V1::UsersController < ApplicationController
 	
 	# Only allow a list of trusted parameters through.
 	def user_params
-		params.permit(:nickname, :avatar, :description, :password, :gender, :birthday, :email, :phone)
+		params.permit(:nickname, :avatar, :description, :password, :gender, :birthday, :email, :phone, :qq_id, :wechat_id)
 	end
 end

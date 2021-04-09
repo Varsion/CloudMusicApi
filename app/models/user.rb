@@ -33,4 +33,16 @@ class User < ApplicationRecord
 		return false if digest.nil?
 		BCrypt::Password.new(digest).is_password?(value)
 	end
+	
+	def encrypt_open_id
+		if qq_id.present? && qq_id_digest.blank?
+			self.qq_id_digest = DigestUtil::encrypt(qq_id)
+			self.qq_id = DigestUtil::encrypt_des(qq_id)
+		end
+		
+		if wechat_id.present? && wechat_id_digest.blank?
+			self.wechat_id_digest = DigestUtil::encrypt(wechat_id)
+			self.wechat_id = DigestUtil::encrypt_des(wechat_id)
+		end
+	end
 end
