@@ -43,7 +43,10 @@ ERROR_EMAIL_ALREADY_CONFIRM=1070
 ERROR_EMAIL_ALREADY_CONFIRM_MESSAGE="The email has been verified, please do not verify again!"
 
 ERROR_CODE=1080
-ERROR_CODE_MEAASGE="Verification code error!"
+ERROR_CODE_MESSAGE="Verification code error!"
 
 ERROR_EXPIRED_CODE=1090
 ERROR_EXPIRED_CODE_MESSAGE="Verification code expired!"
+
+ERROR_USE_LAST_PASSWORD=1100
+ERROR_USE_LAST_PASSWORD_MESSAGE="Password cannot be the same as last time!"

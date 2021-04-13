@@ -42,5 +42,9 @@ module Concerns
 		def render_api_too_fast
 			render_error(ERROR_TOO_FAST, ERROR_TOO_FAST_MESSAGE)
 		end
+		
+		def render_argument_error
+			render_error(ERROR_ARGUMENT, ERROR_ARGUMENT_MESSAGE)
+		end
 	end
 end

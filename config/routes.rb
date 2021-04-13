@@ -2,8 +2,12 @@ Rails.application.routes.draw do
 	
 	namespace :v1 do
 		get 'monitors/version'
-		resources :users, except:[:index, :destroy]
 		
+		# 重置密码
+		post 'users/reset_password', to: 'users#reset_password'
+		
+		resources :users, except:[:index, :destroy]
+
 		# login and logout
 		resources :sessions, only: [:create, :destroy]
 		# Mails
