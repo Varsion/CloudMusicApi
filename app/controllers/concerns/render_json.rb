@@ -38,5 +38,9 @@ module Concerns
 		def render_json_and_code object, code
 			render json: {data:object}, status: code
 		end
+		
+		def render_api_too_fast
+			render_error(ERROR_TOO_FAST, ERROR_TOO_FAST_MESSAGE)
+		end
 	end
 end

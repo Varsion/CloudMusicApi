@@ -35,13 +35,26 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  # 发送邮件设置
-  # 忽略邮件地址错误，也发送
-  config.action_mailer.raise_delivery_errors = true
-
-  # 发送方式
-  # 测试方法发送，不会真发送
-  config.action_mailer.delivery_method = :test
+  # # 发送邮件设置
+  # # 忽略邮件地址错误，也发送
+  # config.action_mailer.raise_delivery_errors = true
+  #
+  # # 发送方式
+  # # 测试方法发送，不会真发送
+  # config.action_mailer.delivery_method = :test
+	
+  # SMTP MAIL
+  config.action_mailer.delivery_method = :smtp
+  # smtp发送设置
+  config.action_mailer.smtp_settings = {
+	  address: ENV["SMTP_ADDRESS"],
+	  port: ENV["SMTP_PORT"],
+	  domain: ENV["SMTP_DOMAIN"],
+	  user_name: ENV["SMTP_USERNAME"],
+	  password: ENV["SMTP_PASSWORD"],
+	  authentication: ENV["SMTP_AUTHENTICATION"],
+	  enable_starttls_auto: ENV["SMTP_ENABLE_STARTTLS_AUTO"]
+  }
   
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

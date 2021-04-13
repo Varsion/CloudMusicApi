@@ -9,7 +9,7 @@ class AllMailer < ApplicationMailer
 	  
 	  @name = user.nickname
 	  @email = user.email
-	  @confirm_url = request.host + "/v1/mails/#{digest}/confirm_verification/"
+	  @confirm_url = "#{ENV["HOST"]}/v1/mails/#{digest}/confirm_verification/"
 	  
     mail to: @email, subject: "CloudMusic 邮箱验证"
   end

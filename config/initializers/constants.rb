@@ -3,6 +3,9 @@
 ERROR_ARGUMENT=30
 ERROR_ARGUMENT_MESSAGE="Parameter error!"
 
+ERROR_TOO_FAST=50
+ERROR_TOO_FAST_MESSAGE="Interface calls are too frequent!"
+
 ERROR_PARAMS_ENCRYPT=60
 ERROR_PARAMS_ENCRYPT_MESSAGE="Incorrect parameter encryption！"
 
