@@ -3,6 +3,9 @@
 ERROR_ARGUMENT=30
 ERROR_ARGUMENT_MESSAGE="Parameter error!"
 
+ERROR_TOO_FAST=50
+ERROR_TOO_FAST_MESSAGE="Interface calls are too frequent!"
+
 ERROR_PARAMS_ENCRYPT=60
 ERROR_PARAMS_ENCRYPT_MESSAGE="Incorrect parameter encryption！"
 
@@ -31,4 +34,19 @@ ERROR_ACCOUNT_BOUND=1050
 ERROR_ACCOUNT_BOUND_MESSAGE="The account has been bound"
 
 ERROR_SAVE_SESSION=1060
-ERROR_SAVE_SESSION_MESSAGE="Login failed！"
+ERROR_SAVE_SESSION_MESSAGE="Login failed!"
+
+ERROR_EMAIL_SEND=1070
+ERROR_EMAIL_SEND_MESSAGE="Failed to send mail!"
+
+ERROR_EMAIL_ALREADY_CONFIRM=1070
+ERROR_EMAIL_ALREADY_CONFIRM_MESSAGE="The email has been verified, please do not verify again!"
+
+ERROR_CODE=1080
+ERROR_CODE_MESSAGE="Verification code error!"
+
+ERROR_EXPIRED_CODE=1090
+ERROR_EXPIRED_CODE_MESSAGE="Verification code expired!"
+
+ERROR_USE_LAST_PASSWORD=1100
+ERROR_USE_LAST_PASSWORD_MESSAGE="Password cannot be the same as last time!"

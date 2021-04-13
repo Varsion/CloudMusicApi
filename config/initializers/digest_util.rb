@@ -11,4 +11,23 @@ module DigestUtil
 	def self.random_base64_32
 		return SecureRandom.urlsafe_base64(32)
 	end
+	
+	# des加密
+	def self.encrypt_des(context)
+		key=ENV["DES_KEY"]
+		cipher = OpenSSL::Cipher::DES.new.encrypt.tap { |obj| obj.key = obj.iv = key }
+		(cipher.update(context) + cipher.final).unpack1('H*').upcase
+	end
+	
+	# des解密
+	def self.decrypt_des(context)
+		key=ENV["DES_KEY"]
+		cipher = OpenSSL::Cipher::DES.new.decrypt.tap { |obj| obj.key = obj.iv = key }
+		cipher.update([context].pack('H*')) + cipher.final
+	end
+	
+	# 复写MD5加密 随机盐
+	def md5 data
+		Digest::MD5.hexdigest("J@5B^#{data}JIO@**#!")
+	end
 end

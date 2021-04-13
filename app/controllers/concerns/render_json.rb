@@ -5,9 +5,15 @@ module Concerns
 				helper_method :render_success, :render_error, :render_default_error, :render_detail_error, :render_json, :render_json_and_code
 			end
 		end
+		
 		# success
 		def render_success data
 			render json: data, status: :ok
+		end
+		
+		# fails
+		def render_fail data
+			render json: data, status: :accepted
 		end
 		
 		# errors
@@ -31,6 +37,14 @@ module Concerns
 		
 		def render_json_and_code object, code
 			render json: {data:object}, status: code
+		end
+		
+		def render_api_too_fast
+			render_error(ERROR_TOO_FAST, ERROR_TOO_FAST_MESSAGE)
+		end
+		
+		def render_argument_error
+			render_error(ERROR_ARGUMENT, ERROR_ARGUMENT_MESSAGE)
 		end
 	end
 end

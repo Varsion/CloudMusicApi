@@ -22,7 +22,10 @@ class V1::UsersController < ApplicationController
 			return
 		end
 		
+		@user.encrypt_open_id
+		
 		if @user.save
+			@user.request_email_verification
 			render_success(@user)
 		else
 			render_detail_error(@user.errors)
@@ -39,6 +42,43 @@ class V1::UsersController < ApplicationController
 		end
 	end
 	
+	def reset_password
+		email = params[:email]
+		code_string = params[:code]
+		password = params[:password]
+		user = User.find_by_email(email)
+		
+		if user.blank?
+			render_error(ERROR_USER_EXIST, ERROR_USER_EXIST_MESSAGE)
+		end
+		
+		# 参数检验
+		if email.blank?
+			render_argument_error
+		end
+		
+		if code_string.blank?
+			render_argument_error
+		end
+		
+		# 验证码校验
+		if user.code != DigestUtil.md5(code_string)
+			render_error(ERROR_CODE, ERROR_CODE_MESSAGE)
+		end
+		
+		if user.authenticated?("password", password)
+			render_error(ERROR_USE_LAST_PASSWORD, ERROR_USE_LAST_PASSWORD_MESSAGE)
+		end
+		
+		user.password = password
+		if user.save
+			user.update_column(:code, nil)
+			render_success("Password reset complete!")
+		else
+			render_detail_error(user.errors)
+		end
+	end
+	
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_user
@@ -47,6 +87,6 @@ class V1::UsersController < ApplicationController
 	
 	# Only allow a list of trusted parameters through.
 	def user_params
-		params.permit(:nickname, :avatar, :description, :password, :gender, :birthday, :email, :phone)
+		params.permit(:nickname, :avatar, :description, :password, :gender, :birthday, :email, :phone, :qq_id, :wechat_id)
 	end
 end

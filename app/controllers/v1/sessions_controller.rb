@@ -4,6 +4,8 @@ class V1::SessionsController < ApplicationController
 	  email = params[:email]
 	  phone = params[:phone]
 	  password = params[:password]
+	  qq_id = params[:qq_id]
+	  wechat_id = params[:wechat_id]
 	  # 同时支持手机号和邮箱登陆
 	  if email.present? && password.present?
 		  user = User.find_by_email(email)
@@ -13,6 +15,14 @@ class V1::SessionsController < ApplicationController
 		  user = User.find_by_phone(phone)
 		  attribute = "password"
 		  digest = password
+	  elsif qq_id.present?
+		  user = User.find_by_qq_id(DigestUtil.encrypt_des(qq_id))
+		  attribute = "qq_id"
+		  digest = qq_id
+	  elsif wechat_id.present?
+		  user = User.find_by_wechat_id(DigestUtil.encrypt_des(wechat_id))
+		  attribute = "wechat_id"
+		  digest = wechat_id
 	  end
 	  
 	  if user
