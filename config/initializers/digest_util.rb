@@ -25,4 +25,9 @@ module DigestUtil
 		cipher = OpenSSL::Cipher::DES.new.decrypt.tap { |obj| obj.key = obj.iv = key }
 		cipher.update([context].pack('H*')) + cipher.final
 	end
+	
+	# 复写MD5加密 随机盐
+	def md5 data
+		Digest::MD5.hexdigest("J@5B^#{data}JIO@**#!")
+	end
 end
