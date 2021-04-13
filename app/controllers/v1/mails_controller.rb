@@ -20,6 +20,7 @@ class V1::MailsController < ApplicationController
 			render_fail("获取验证信息失败，请重新发送验证邮件")
 		elsif Time.now > user.confirmation_sent_at + 1.day
 			render_fail("邮箱验证码过期，请重新验证")
+			user.update_columns({ confirmation_digest: nil })
 		elsif user.email_verification?
 			render_fail("该邮箱地址已验证")
 		else

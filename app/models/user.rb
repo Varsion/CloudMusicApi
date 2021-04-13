@@ -60,7 +60,7 @@ class User < ApplicationRecord
 			return false
 		end
 		
-		#TODO 发送邮件
+		AllMailer.confirm_verification(self, confirmation_digest).deliver_later
 	end
 	# 邮件是否验证
 	def email_verification?
