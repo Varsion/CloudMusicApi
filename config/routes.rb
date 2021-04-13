@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 		
 		# login and logout
 		resources :sessions, only: [:create, :destroy]
+		# Mails
+		post 'mails/request_verification', to: 'mails#request_verification'
 	end
 	
 	namespace :v2 do

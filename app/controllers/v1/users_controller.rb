@@ -25,6 +25,7 @@ class V1::UsersController < ApplicationController
 		@user.encrypt_open_id
 		
 		if @user.save
+			@user.request_email_verification
 			render_success(@user)
 		else
 			render_detail_error(@user.errors)
