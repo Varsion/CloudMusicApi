@@ -5,9 +5,15 @@ module Concerns
 				helper_method :render_success, :render_error, :render_default_error, :render_detail_error, :render_json, :render_json_and_code
 			end
 		end
+		
 		# success
 		def render_success data
 			render json: data, status: :ok
+		end
+		
+		# fails
+		def render_fail data
+			render json: data, status: :accepted
 		end
 		
 		# errors
