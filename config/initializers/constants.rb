@@ -1,5 +1,10 @@
-# Global Error code and Error message
+# 发送验证码
+PLATFORM_EMAIL=0
+PLATFORM_PHONE=10
+PLATFORM_QQ=20
+PLATFORM_WECHAT=30
 
+# Global Error code and Error message
 ERROR_ARGUMENT=30
 ERROR_ARGUMENT_MESSAGE="Parameter error!"
 

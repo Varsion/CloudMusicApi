@@ -8,12 +8,12 @@ module Concerns
 		
 		# success
 		def render_success data
-			render json: data, status: :ok
+			render json: {status: :ok, message: data}, status: :ok
 		end
 		
 		# fails
 		def render_fail data
-			render json: data, status: :accepted
+			render json: {status: :accepted, message: data}, status: :accepted
 		end
 		
 		# errors

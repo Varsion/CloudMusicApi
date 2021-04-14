@@ -27,7 +27,7 @@ module DigestUtil
 	end
 	
 	# 复写MD5加密 随机盐
-	def md5 data
+	def self.md5 data
 		Digest::MD5.hexdigest("J@5B^#{data}JIO@**#!")
 	end
 end
