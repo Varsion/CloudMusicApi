@@ -1,4 +1,5 @@
 class V1::UsersController < ApplicationController
+	before_action :authenticate_user!, only: [:bind, :unbind]
 	before_action :set_user, only: %i[ show update destroy ]
 	
 	
@@ -79,6 +80,57 @@ class V1::UsersController < ApplicationController
 		end
 	end
 	
+	# 绑定第三方
+	def bind
+		platform = params[:platform]
+		account = params[:account]
+		
+		if platform.blank? or account.blank?
+			render_argument_error
+		end
+		
+		# 平台取值是否正确
+		if PLATFORM_QQ == platform
+			@current_user.qq_id = account
+		elsif PLATFORM_WECHAT == platform
+			@current_user.wechat_id = account
+		else
+			render_argument_error
+		end
+		
+		# 加密
+		@current_user.encrypt_open_id
+		
+		# 保存，不验证规则
+		if @current_user.save(validate: false)
+			render_success("Bind Success!")
+		else
+			render_argument_error
+		end
+	end
+	# 解绑第三方
+	def unbind
+		# url 中取值为String
+		platform = params[:id]
+		
+		if platform.blank?
+			render_argument_error
+		end
+		
+		if PLATFORM_QQ.to_s == platform
+			@current_user.qq_id = nil
+			@current_user.qq_id_digest = nil
+		elsif PLATFORM_WECHAT.to_s == platform
+			@current_user.wechat_id = nil
+			@current_user.wechat_id_digest = nil
+		else
+			render_argument_error
+		end
+		
+		if @current_user.save(validate: false)
+			render_argument_error
+		end
+	end
 	private
 	# Use callbacks to share common setup or constraints between actions.
 	def set_user
