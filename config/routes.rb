@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 		get 'mails/:id/confirm_verification/' , to: 'mails#confirm_verification'
 		# 验证码
 		post 'codes/request_email_code', to: 'codes#request_email_code'
+		post 'code/request_sms_code', to: 'code#request_sms_code'
 	end
 	
 	namespace :v2 do
