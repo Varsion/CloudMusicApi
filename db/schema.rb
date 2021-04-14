@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_01_120152) do
+ActiveRecord::Schema.define(version: 2021_04_13_073455) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 2021_04_01_120152) do
     t.string "wechat_id_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code"
+    t.datetime "code_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["qq_id"], name: "index_users_on_qq_id", unique: true

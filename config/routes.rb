@@ -10,11 +10,18 @@ Rails.application.routes.draw do
 
 		# login and logout
 		resources :sessions, only: [:create, :destroy]
+		
+		# 绑定第三方账号
+		post 'users/bind', to: 'users#bind'
+		
+		# 解绑第三方账号
+		delete 'users/:id/unbind', to: 'users#unbind'
 		# Mails
 		post 'mails/request_verification', to: 'mails#request_verification'
 		get 'mails/:id/confirm_verification/' , to: 'mails#confirm_verification'
 		# 验证码
 		post 'codes/request_email_code', to: 'codes#request_email_code'
+		post 'code/request_sms_code', to: 'code#request_sms_code'
 	end
 	
 	namespace :v2 do

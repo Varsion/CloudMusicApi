@@ -13,4 +13,11 @@ class AllMailer < ApplicationMailer
 	  
     mail to: @email, subject: "CloudMusic 邮箱验证"
   end
+
+  def request_email_code user, code
+	  @code = code
+	  @name = user.nickname
+	  @email = user.email
+	  mail to: @email, subject: "CloudMusic 验证码"
+  end
 end

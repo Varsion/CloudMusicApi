@@ -2,18 +2,19 @@ module Concerns
 	module RenderJson
 		def self.included base
 			base.class_eval do
-				helper_method :render_success, :render_error, :render_default_error, :render_detail_error, :render_json, :render_json_and_code
+				helper_method :render_success, :render_fail, :render_error, :render_default_error, :render_detail_error,
+				              :render_json, :render_json_and_code, :render_api_too_fast, :render_argument_error, :render_send_sms_error
 			end
 		end
 		
 		# success
 		def render_success data
-			render json: data, status: :ok
+			render json: {status: :ok, message: data}, status: :ok
 		end
 		
 		# fails
 		def render_fail data
-			render json: data, status: :accepted
+			render json: {status: :accepted, message: data}, status: :accepted
 		end
 		
 		# errors
@@ -45,6 +46,10 @@ module Concerns
 		
 		def render_argument_error
 			render_error(ERROR_ARGUMENT, ERROR_ARGUMENT_MESSAGE)
+		end
+		
+		def render_send_sms_error
+			render_error(ERROR_SEND_SMS, ERROR_SEND_SMS_MESSAGE)
 		end
 	end
 end
