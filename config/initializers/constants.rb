@@ -4,6 +4,12 @@ PLATFORM_PHONE=10
 PLATFORM_QQ=20
 PLATFORM_WECHAT=30
 
+# Aliyun SMS模版编号
+# 验证码
+# 您的验证码为： ${code}
+ALIYUN_VERIFY_CODE="SMS_215335203"
+
+
 # Global Error code and Error message
 ERROR_ARGUMENT=30
 ERROR_ARGUMENT_MESSAGE="Parameter error!"
@@ -55,3 +61,18 @@ ERROR_EXPIRED_CODE_MESSAGE="Verification code expired!"
 
 ERROR_USE_LAST_PASSWORD=1100
 ERROR_USE_LAST_PASSWORD_MESSAGE="Password cannot be the same as last time!"
+
+ERROR_SEND_SMS=1110
+ERROR_SEND_SMS_MESSAGE="Message failed to send!"
+
+ERROR_SEND_WECHAT=1120
+ERROR_SEND_WECHAT_MESSAGE="WeChat verification code failed to be sent!"
+
+ERROR_NOT_BIND_WECHAT=1130
+ERROR_NOT_BIND_WECHAT_MESSAGE="Please bind WeChat first!"
+
+ERROR_ORDER_STATUS=1140
+ERROR_ORDER_STATUS_MESSAGE="Order status is wrong!"
+
+ERROR_ORDER_PAY_CHANNEL=1150
+ERROR_ORDER_PAY_CHANNEL_MESSAGE="Wrong payment channel!"
