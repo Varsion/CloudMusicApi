@@ -8,8 +8,10 @@ PLATFORM_WECHAT=30
 # 验证码
 # 您的验证码为： ${code}
 ALIYUN_VERIFY_CODE="SMS_215335203"
-
-
+# 极光推送
+# 客户端退出事件
+# push_util
+PUSH_STYLE_LOGOUT=0
 # Global Error code and Error message
 ERROR_ARGUMENT=30
 ERROR_ARGUMENT_MESSAGE="Parameter error!"

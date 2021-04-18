@@ -6,6 +6,8 @@ class V1::SessionsController < ApplicationController
 	  password = params[:password]
 	  qq_id = params[:qq_id]
 	  wechat_id = params[:wechat_id]
+	  # 推送的设备ID
+	  push = params[:push]
 	  # 同时支持手机号和邮箱登陆
 	  if email.present? && password.present?
 		  user = User.find_by_email(email)
@@ -32,6 +34,14 @@ class V1::SessionsController < ApplicationController
 			  
 			  if user.update_attribute(:session_digest, session_digest)
 				  # 登陆成功
+				  
+				  # 如果设备不相同 则挤掉用户并更新设备字段， 相同则不做处理
+				  if push != user.push
+					  PushUtil.send_logout(user.id)
+					  user.update_column(:push, push)
+				  end
+				  
+				  
 				  # 返回 userid 和 未加密的 session
 				  render_json({user:user.id, session: session})
 			  else
