@@ -17,6 +17,9 @@ gem 'redis', '~> 4.0'
 gem 'aliyun-sms'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+# 极光推送
+# 实现同设备用户单点登陆
+gem 'jpush'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
