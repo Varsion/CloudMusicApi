@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 		# 验证码
 		post 'codes/request_email_code', to: 'codes#request_email_code'
 		post 'code/request_sms_code', to: 'code#request_sms_code'
+		# 广告
+		resources :ads,except: [:show]
 	end
 	
 	namespace :v2 do
