@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  song: one
+  sheet: one
+  user: one
+
+two:
+  song: two
+  sheet: two
+  user: two

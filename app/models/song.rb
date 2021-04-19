@@ -2,6 +2,11 @@ class Song < ApplicationRecord
 	# 一个歌单属于一个用户
 	belongs_to :user
 	
+	has_many :relations
+	# 一个音乐，有多个歌单（就是包含该歌单的音乐）
+	# through：表示这个关系是通过relations表来管理的
+	has_many :sheets, through: :relations
+	
 	# 歌手，这里引用的是用户对象
 	# 下面的意思是：
 	# 一首音乐属于一个singer，类名是User
