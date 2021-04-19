@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 		post 'code/request_sms_code', to: 'code#request_sms_code'
 		# 广告
 		resources :ads,except: [:show]
+		# 歌单
+		resources :sheets
 	end
 	
 	namespace :v2 do

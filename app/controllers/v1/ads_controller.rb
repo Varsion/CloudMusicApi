@@ -1,7 +1,7 @@
 class V1::AdsController < ApplicationController
 	before_action :authenticate_user!, except: [:index]
 	before_action :set_ad, only: [:destroy, :update]
-	
+	# TODO 后期完善广告管理
 	  def index
 		  @ads = Ad.all
 	  end

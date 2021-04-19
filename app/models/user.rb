@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 	# 表间链接
 	has_many :ads
+	has_many :sheets
 	# 添加密码属性 非数据库字段
 	attr_accessor :password
 	# 验证约束
