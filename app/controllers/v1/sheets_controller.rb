@@ -7,7 +7,7 @@ class V1::SheetsController < ApplicationController
 
     def create
 	    @data = current_user.sheets.build(sheet_params)
-	    if @data .save
+	    if @data.save
 		    render_success(@data)
 	    else
 		    render_detail_error(@data.errors)

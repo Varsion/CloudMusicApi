@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 		resources :ads,except: [:show]
 		# 歌单
 		resources :sheets
+		#歌曲
+		resources :songs
 	end
 	
 	namespace :v2 do
