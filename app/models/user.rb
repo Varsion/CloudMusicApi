@@ -75,4 +75,8 @@ class User < ApplicationRecord
 	def email_verification?
 		confirmed_at.present?
 	end
+	# 是否收藏歌单
+	def collection?(sheet_id)
+		collections.find_by_sheet_id(sheet_id)
+	end
 end

@@ -16,6 +16,13 @@ class V1::SheetsController < ApplicationController
 
     def show
 	    @data = Sheet.find(params[:id])
+	    if current_user && current_user.collection?(@data.id)
+		    # 如果登录，就判断是否收藏
+		    @collection_id = true
+	    else
+		    # 未登陆或未收藏 都显示为未收藏
+		    @collection_id = false
+	    end
     end
 
     def update

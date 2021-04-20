@@ -3,4 +3,6 @@ json.data @data do |data|
 	json.user do
 		json.(data.user, :id, :nickname, :avatar)
 	end
+	json.isCollection @collection_id
+	
 end
