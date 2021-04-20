@@ -1,7 +1,7 @@
 class V1::UsersController < ApplicationController
 	before_action :authenticate_user!, only: [:bind, :unbind]
 	before_action :set_user, only: %i[ show update destroy ]
-	
+	# TODO 后期完善用户表拆分
 	
 	# GET /users/1
 	# GET /users/1.json

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  banner: MyString
+  uri: MyString
+  clicks_count: 1
+  comments_count: 1
+  style: 1
+  lyric: MyText
+  user: one
+  singer_id: 1
+
+two:
+  title: MyString
+  banner: MyString
+  uri: MyString
+  clicks_count: 1
+  comments_count: 1
+  style: 1
+  lyric: MyText
+  user: two
+  singer_id: 1

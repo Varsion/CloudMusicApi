@@ -4,6 +4,9 @@ PLATFORM_PHONE=10
 PLATFORM_QQ=20
 PLATFORM_WECHAT=30
 
+#歌词类型
+STYLE_LYRIC=0
+STYLE_LYRIC_KSC=10
 # Aliyun SMS模版编号
 # 验证码
 # 您的验证码为： ${code}
