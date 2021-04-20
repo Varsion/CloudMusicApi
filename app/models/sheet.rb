@@ -14,5 +14,9 @@ class Sheet < ApplicationRecord
     # 歌单下有多个标签
     has_many :labels
     has_many :tags, through: :labels
+
+    # 让当前模型，支持labels嵌套模型
+    accepts_nested_attributes_for :labels
+    
     default_scope -> { order(created_at: :desc) }
 end

@@ -39,7 +39,7 @@ class V1::SheetsController < ApplicationController
 	
 	private
 		def sheet_params
-			params.permit(:title, :banner, :description)
+			params.permit(:title, :banner, :description, labels_attributes: [:id, :tag_id, :user_id])
 		end
 		def set_data
 			@data = current_user.sheets.find(params[:id])
