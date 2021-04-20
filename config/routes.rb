@@ -21,11 +21,13 @@ Rails.application.routes.draw do
 		get 'mails/:id/confirm_verification/' , to: 'mails#confirm_verification'
 		# 验证码
 		post 'codes/request_email_code', to: 'codes#request_email_code'
-		post 'code/request_sms_code', to: 'code#request_sms_code'
+		post 'code/request_sms_code', to: 'codes#request_sms_code'
 		# 广告
 		resources :ads,except: [:show]
 		# 歌单
-		resources :sheets
+		resources :sheets do
+			resources :relations, only: [:create, :destroy]
+		end
 		#歌曲
 		resources :songs
 	end
