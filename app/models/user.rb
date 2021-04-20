@@ -7,6 +7,8 @@ class User < ApplicationRecord
 	has_many :collections
 	# 用于区分创建的歌单和收藏的歌单
 	has_many :collection_sheets, through: :collections, source: "sheet"
+	# 创建多个标签
+	has_many :tags
 	
 	# 添加密码属性 非数据库字段
 	attr_accessor :password

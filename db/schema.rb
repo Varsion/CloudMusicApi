@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_20_012318) do
+ActiveRecord::Schema.define(version: 2021_04_20_073822) do
 
   create_table "ads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
@@ -73,6 +73,17 @@ ActiveRecord::Schema.define(version: 2021_04_20_012318) do
     t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.bigint "parent_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_tags_on_parent_id"
+    t.index ["title", "user_id"], name: "index_tags_on_title_and_user_id", unique: true
+    t.index ["user_id"], name: "index_tags_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "avatar"
@@ -111,4 +122,5 @@ ActiveRecord::Schema.define(version: 2021_04_20_012318) do
   add_foreign_key "relations", "users"
   add_foreign_key "sheets", "users"
   add_foreign_key "songs", "users"
+  add_foreign_key "tags", "users"
 end
