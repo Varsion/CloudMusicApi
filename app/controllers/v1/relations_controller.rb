@@ -1,5 +1,5 @@
 class V1::RelationsController < ApplicationController
-	before_action :authenticate_user!, only: [:create,:destroy]
+	before_action :authenticate_user!
 	# 只能向自己歌单添加歌曲
 	def create
 		# sheet_id 是url中的id

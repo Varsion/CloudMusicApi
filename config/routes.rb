@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 		end
 		#歌曲
 		resources :songs
+		resources :collections, only: [:create, :destroy]
+		resources :tags, only: [:index, :create, :update, :destroy]
 	end
 	
 	namespace :v2 do

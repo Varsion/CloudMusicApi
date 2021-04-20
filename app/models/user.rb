@@ -3,6 +3,13 @@ class User < ApplicationRecord
 	has_many :ads
 	has_many :sheets
 	has_many :songs
+	# 收藏多个歌单
+	has_many :collections
+	# 用于区分创建的歌单和收藏的歌单
+	has_many :collection_sheets, through: :collections, source: "sheet"
+	# 创建多个标签
+	has_many :tags
+	
 	# 添加密码属性 非数据库字段
 	attr_accessor :password
 	# 验证约束
@@ -69,5 +76,9 @@ class User < ApplicationRecord
 	# 邮件是否验证
 	def email_verification?
 		confirmed_at.present?
+	end
+	# 是否收藏歌单
+	def collection?(sheet_id)
+		collections.find_by_sheet_id(sheet_id)
 	end
 end
