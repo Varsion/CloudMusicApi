@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_19_065439) do
+ActiveRecord::Schema.define(version: 2021_04_20_012318) do
 
   create_table "ads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
@@ -21,6 +21,28 @@ ActiveRecord::Schema.define(version: 2021_04_19_065439) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_ads_on_user_id"
+  end
+
+  create_table "collections", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "sheet_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sheet_id", "user_id"], name: "index_collections_on_sheet_id_and_user_id", unique: true
+    t.index ["sheet_id"], name: "index_collections_on_sheet_id"
+    t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
+  create_table "relations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "song_id"
+    t.bigint "sheet_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sheet_id"], name: "index_relations_on_sheet_id"
+    t.index ["song_id", "sheet_id", "user_id"], name: "index_relations_on_song_id_and_sheet_id_and_user_id", unique: true
+    t.index ["song_id"], name: "index_relations_on_song_id"
+    t.index ["user_id"], name: "index_relations_on_user_id"
   end
 
   create_table "sheets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -82,6 +104,11 @@ ActiveRecord::Schema.define(version: 2021_04_19_065439) do
   end
 
   add_foreign_key "ads", "users"
+  add_foreign_key "collections", "sheets"
+  add_foreign_key "collections", "users"
+  add_foreign_key "relations", "sheets"
+  add_foreign_key "relations", "songs"
+  add_foreign_key "relations", "users"
   add_foreign_key "sheets", "users"
   add_foreign_key "songs", "users"
 end

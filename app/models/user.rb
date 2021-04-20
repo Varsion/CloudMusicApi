@@ -3,6 +3,11 @@ class User < ApplicationRecord
 	has_many :ads
 	has_many :sheets
 	has_many :songs
+	# 收藏多个歌单
+	has_many :collections
+	# 用于区分创建的歌单和收藏的歌单
+	has_many :collection_sheets, through: :collections, source: "sheet"
+	
 	# 添加密码属性 非数据库字段
 	attr_accessor :password
 	# 验证约束
