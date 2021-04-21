@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_20_085940) do
+ActiveRecord::Schema.define(version: 2021_04_21_013651) do
 
   create_table "ads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
@@ -126,6 +126,19 @@ ActiveRecord::Schema.define(version: 2021_04_20_085940) do
     t.index ["wechat_id"], name: "index_users_on_wechat_id", unique: true
   end
 
+  create_table "videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "uri", null: false
+    t.string "banner", null: false
+    t.integer "duration", default: 0, null: false
+    t.bigint "user_id"
+    t.integer "clicks_count", default: 0, null: false
+    t.integer "comments_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_videos_on_user_id"
+  end
+
   add_foreign_key "ads", "users"
   add_foreign_key "collections", "sheets"
   add_foreign_key "collections", "users"
@@ -138,4 +151,5 @@ ActiveRecord::Schema.define(version: 2021_04_20_085940) do
   add_foreign_key "sheets", "users"
   add_foreign_key "songs", "users"
   add_foreign_key "tags", "users"
+  add_foreign_key "videos", "users"
 end
