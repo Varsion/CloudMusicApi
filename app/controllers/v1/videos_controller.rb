@@ -2,7 +2,7 @@ class V1::VideosController < ApplicationController
 	before_action :authenticate_user!, only: [:create,:update,:destroy]
 	before_action :set_data, only: [:update, :destroy]
 	def index
-		@videos=Video.all
+		@data=Video.all
 	end
 	
 	def create

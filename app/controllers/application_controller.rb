@@ -17,6 +17,8 @@ class ApplicationController < ActionController::API
 	include Concerns::RenderJson
 	# 引入 current_user
 	include Concerns::CurrentUser
+	# 引入 Helper
+	include ApplicationHelper
 	
 	private
 		def destroy_session
