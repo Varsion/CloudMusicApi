@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_21_013651) do
+ActiveRecord::Schema.define(version: 2021_04_21_030503) do
 
   create_table "ads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
@@ -31,6 +31,24 @@ ActiveRecord::Schema.define(version: 2021_04_21_013651) do
     t.index ["sheet_id", "user_id"], name: "index_collections_on_sheet_id_and_user_id", unique: true
     t.index ["sheet_id"], name: "index_collections_on_sheet_id"
     t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "style", null: false
+    t.string "content", null: false
+    t.bigint "parent_id"
+    t.bigint "user_id"
+    t.bigint "video_id"
+    t.bigint "sheet_id"
+    t.bigint "song_id"
+    t.integer "likes_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
+    t.index ["sheet_id"], name: "index_comments_on_sheet_id"
+    t.index ["song_id"], name: "index_comments_on_song_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["video_id"], name: "index_comments_on_video_id"
   end
 
   create_table "labels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -142,6 +160,10 @@ ActiveRecord::Schema.define(version: 2021_04_21_013651) do
   add_foreign_key "ads", "users"
   add_foreign_key "collections", "sheets"
   add_foreign_key "collections", "users"
+  add_foreign_key "comments", "sheets"
+  add_foreign_key "comments", "songs"
+  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "videos"
   add_foreign_key "labels", "sheets"
   add_foreign_key "labels", "tags"
   add_foreign_key "labels", "users"
