@@ -9,6 +9,8 @@ class User < ApplicationRecord
 	has_many :collection_sheets, through: :collections, source: "sheet"
 	# 创建多个标签
 	has_many :tags
+	# 可创建多个视频
+	has_many :videos
 	
 	# 添加密码属性 非数据库字段
 	attr_accessor :password

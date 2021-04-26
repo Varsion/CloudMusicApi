@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  uri: MyString
+  banner: MyString
+  duration: 1
+  user: one
+  clicks_count: 1
+  comments_count: 1
+
+two:
+  title: MyString
+  uri: MyString
+  banner: MyString
+  duration: 1
+  user: two
+  clicks_count: 1
+  comments_count: 1

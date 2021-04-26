@@ -4,9 +4,12 @@ class V1::SongsController < ApplicationController
 	def index
 		@data = Song.all
 	end
-	def show
 	
+	def show
+		@data=Video.find(params[:id])
+		@data.update_column(:clicks_count, @data.clicks_count+1)
 	end
+	
 	def create
 		@data = current_user.songs.build(data_params)
 		if @data.save

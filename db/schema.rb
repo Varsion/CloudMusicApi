@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_20_085940) do
+ActiveRecord::Schema.define(version: 2021_04_26_074837) do
 
   create_table "ads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
-    t.string "banner"
+    t.string "banner", null: false
     t.string "uri"
-    t.integer "order"
+    t.integer "order", default: 0, null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -31,6 +31,24 @@ ActiveRecord::Schema.define(version: 2021_04_20_085940) do
     t.index ["sheet_id", "user_id"], name: "index_collections_on_sheet_id_and_user_id", unique: true
     t.index ["sheet_id"], name: "index_collections_on_sheet_id"
     t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "style", default: 0, null: false
+    t.string "content", null: false
+    t.bigint "parent_id"
+    t.bigint "user_id"
+    t.bigint "video_id"
+    t.bigint "sheet_id"
+    t.bigint "song_id"
+    t.integer "likes_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
+    t.index ["sheet_id"], name: "index_comments_on_sheet_id"
+    t.index ["song_id"], name: "index_comments_on_song_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["video_id"], name: "index_comments_on_video_id"
   end
 
   create_table "labels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -58,12 +76,12 @@ ActiveRecord::Schema.define(version: 2021_04_20_085940) do
   end
 
   create_table "sheets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.string "banner"
     t.string "description"
-    t.integer "clicks_count"
-    t.integer "collections_count"
-    t.integer "comments_count"
+    t.integer "clicks_count", default: 0, null: false
+    t.bigint "collections_count"
+    t.bigint "comments_count"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -71,11 +89,11 @@ ActiveRecord::Schema.define(version: 2021_04_20_085940) do
   end
 
   create_table "songs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title"
-    t.string "banner"
-    t.string "uri"
-    t.integer "clicks_count"
-    t.integer "comments_count"
+    t.string "title", null: false
+    t.string "banner", null: false
+    t.string "uri", null: false
+    t.integer "clicks_count", default: 0, null: false
+    t.integer "comments_count", default: 0, null: false
     t.integer "style"
     t.text "lyric"
     t.bigint "user_id"
@@ -120,15 +138,39 @@ ActiveRecord::Schema.define(version: 2021_04_20_085940) do
     t.string "code"
     t.datetime "code_sent_at"
     t.string "push"
+    t.integer "songs_count", default: 0, null: false
+    t.integer "sheets_count", default: 0, null: false
+    t.integer "videos_count", default: 0, null: false
+    t.integer "comments_count", default: 0, null: false
+    t.integer "likes_count", default: 0, null: false
+    t.integer "followers_count", default: 0, null: false
+    t.integer "followings_count", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["qq_id"], name: "index_users_on_qq_id", unique: true
     t.index ["wechat_id"], name: "index_users_on_wechat_id", unique: true
   end
 
+  create_table "videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "uri", null: false
+    t.string "banner", null: false
+    t.integer "duration", default: 0, null: false
+    t.bigint "user_id"
+    t.integer "clicks_count", default: 0, null: false
+    t.integer "comments_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_videos_on_user_id"
+  end
+
   add_foreign_key "ads", "users"
   add_foreign_key "collections", "sheets"
   add_foreign_key "collections", "users"
+  add_foreign_key "comments", "sheets"
+  add_foreign_key "comments", "songs"
+  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "videos"
   add_foreign_key "labels", "sheets"
   add_foreign_key "labels", "tags"
   add_foreign_key "labels", "users"
@@ -138,4 +180,5 @@ ActiveRecord::Schema.define(version: 2021_04_20_085940) do
   add_foreign_key "sheets", "users"
   add_foreign_key "songs", "users"
   add_foreign_key "tags", "users"
+  add_foreign_key "videos", "users"
 end

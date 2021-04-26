@@ -28,10 +28,14 @@ Rails.application.routes.draw do
 		resources :sheets do
 			resources :relations, only: [:create, :destroy]
 		end
-		#歌曲
+		# 歌曲
 		resources :songs
 		resources :collections, only: [:create, :destroy]
 		resources :tags, only: [:index, :create, :update, :destroy]
+		# 视频
+		resources :videos
+		# 评论
+		resources :comments, except: :update
 	end
 	
 	namespace :v2 do

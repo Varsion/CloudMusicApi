@@ -11,8 +11,7 @@ class CreateSheets < ActiveRecord::Migration[5.2]
 			t.string :description
 			
 			# 点击率（点击到详情）
-			# 原版是播放音乐量
-			t.integer :clicks_count,limit:8
+			t.integer :clicks_count, null: false, default: 0
 			
 			# 收藏数
 			t.integer :collections_count,limit:8
