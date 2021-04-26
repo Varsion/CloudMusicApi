@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 		resources :tags, only: [:index, :create, :update, :destroy]
 		# 视频
 		resources :videos
+		# 评论
+		resources :comments, except: :update
 	end
 	
 	namespace :v2 do

@@ -7,7 +7,7 @@ class Comment < ApplicationRecord
 	has_many :children, class_name: "Comment",
 	         foreign_key: "parent_id"
 	
-	belongs_to :user
+	belongs_to :user, counter_cache: true
 	
 	# counter_cache字段
 	# 表示在video表中创建comments_count字段

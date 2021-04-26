@@ -1,8 +1,8 @@
 class CreateComments < ActiveRecord::Migration[5.2]
 	def change
 		create_table :comments do |t|
-			#评论类型：0:视频,10:单曲,30:歌单
-			t.integer :style, null: false
+			#评论类型：0:没有关联数据 10:视频,20:单曲,30:歌单
+			t.integer :style, null: false, default: 0
 			
 			# 评论内容
 			t.string :content, null: false
