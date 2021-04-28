@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_26_074837) do
+ActiveRecord::Schema.define(version: 2021_04_28_090923) do
 
   create_table "ads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(version: 2021_04_26_074837) do
     t.index ["tag_id", "sheet_id", "user_id"], name: "index_labels_on_tag_id_and_sheet_id_and_user_id", unique: true
     t.index ["tag_id"], name: "index_labels_on_tag_id"
     t.index ["user_id"], name: "index_labels_on_user_id"
+  end
+
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "comment_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id", "user_id"], name: "index_likes_on_comment_id_and_user_id", unique: true
+    t.index ["comment_id"], name: "index_likes_on_comment_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "relations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -174,6 +184,8 @@ ActiveRecord::Schema.define(version: 2021_04_26_074837) do
   add_foreign_key "labels", "sheets"
   add_foreign_key "labels", "tags"
   add_foreign_key "labels", "users"
+  add_foreign_key "likes", "comments"
+  add_foreign_key "likes", "users"
   add_foreign_key "relations", "sheets"
   add_foreign_key "relations", "songs"
   add_foreign_key "relations", "users"
