@@ -81,3 +81,6 @@ ERROR_ORDER_STATUS_MESSAGE="Order status is wrong!"
 
 ERROR_ORDER_PAY_CHANNEL=1150
 ERROR_ORDER_PAY_CHANNEL_MESSAGE="Wrong payment channel!"
+
+# 评论排序
+COMMENT_HOT="10"

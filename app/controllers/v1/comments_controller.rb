@@ -3,7 +3,12 @@ class V1::CommentsController < ApplicationController
 	before_action :set_data, only: [:show, :update, :destroy]
 	
 	def index
-		@data=paginator(Comment.all)
+		comment=Comment
+		
+		if params[:order] == COMMENT_HOT
+			comment = comment.reorder(likes_count: :desc, created_at: :desc)
+		end
+		@data = paginator(comment)
 	end
 	
 	def show
