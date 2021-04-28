@@ -14,4 +14,11 @@ module ApplicationHelper
 		# total_count：总条数
 		json.(object,:current_page,:next_page,:prev_page,:total_pages,:total_count)
 	end
+	
+	def likes? json, object
+		like=current_user.likes.find_by_comment_id(object.id)
+		if current_user && like
+			json.like like.id
+		end
+	end
 end

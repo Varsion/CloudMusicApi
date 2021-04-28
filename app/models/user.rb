@@ -12,6 +12,8 @@ class User < ApplicationRecord
 	# 可创建多个视频
 	has_many :videos
 	
+	# 用户点赞
+	has_many :likes
 	# 添加密码属性 非数据库字段
 	attr_accessor :password
 	# 验证约束

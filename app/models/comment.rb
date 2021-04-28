@@ -8,7 +8,8 @@ class Comment < ApplicationRecord
 	         foreign_key: "parent_id"
 	
 	belongs_to :user, counter_cache: true
-	
+	# 评论点赞
+	has_many :likes
 	# counter_cache字段
 	# 表示在video表中创建comments_count字段
 	# 用来缓存评论数量，如果没有创建，要获取数量
