@@ -18,5 +18,4 @@ json.data @data do |data|
 			json.(data.video, :id, :title)
 		end
 	end
-	
 end

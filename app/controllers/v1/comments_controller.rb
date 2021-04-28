@@ -3,7 +3,7 @@ class V1::CommentsController < ApplicationController
 	before_action :set_data, only: [:show, :update, :destroy]
 	
 	def index
-		@data=Comment.all
+		@data=paginator(Comment.all)
 	end
 	
 	def show
